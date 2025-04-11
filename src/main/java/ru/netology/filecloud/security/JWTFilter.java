@@ -8,7 +8,6 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import ru.netology.filecloud.service.CustomUserDetailsService;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -22,8 +21,6 @@ import java.util.List;
 public class JWTFilter extends OncePerRequestFilter {
 
 
-    @Autowired
-    CustomUserDetailsService userDetailsService;
     @Autowired
     private JWTUtil jwtUtil;
 

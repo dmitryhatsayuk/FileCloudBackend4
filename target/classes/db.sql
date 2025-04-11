@@ -1,8 +1,8 @@
 create table "user"
 (
-    id int primary key,
-    login varchar(255),
-    password varchar(255),
+    id        int primary key,
+    login     varchar(255),
+    password  varchar(255),
     authority varchar(255)
 );
 
@@ -12,10 +12,10 @@ values (1, 'user', 'user', 'USER'),
 
 create table "user_files"
 (
-    id int primary key,
-    file_name varchar(255),
+    id           int primary key,
+    file_name    varchar(255),
     file_content oid,
-    user_id int references "user"(id)
+    user_id      int references "user" (id)
 );
 
 insert into "user_files"(id, file_name, file_content, user_id)

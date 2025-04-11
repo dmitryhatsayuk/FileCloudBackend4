@@ -86,13 +86,11 @@ public class UserFileServiceImpl implements UserFileService {
         var login = myAuthenticationLogin();
         var dbUserFiles = userFileService.findUserFilesByUserLogin(login);
         List<ListResponse> nameSize = new ArrayList<>();
-        dbUserFiles.forEach(db -> {
-            nameSize.add
-                    (new ListResponse(
-                            db.getFileName(),
-                            db.getFileContent().length
-                    ));
-        });
+        dbUserFiles.forEach(db -> nameSize.add
+                (new ListResponse(
+                        db.getFileName(),
+                        db.getFileContent().length
+                )));
         return nameSize;
     }
 
