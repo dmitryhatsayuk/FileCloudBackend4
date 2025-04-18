@@ -12,6 +12,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+
 public class File {
 
     @Id
@@ -24,6 +25,6 @@ public class File {
     private byte[] fileContent;
 
     @ManyToOne
-    private User user;
+    private Users users;
 
 }

@@ -5,7 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import ru.netology.filecloud.entity.User;
+import ru.netology.filecloud.entity.Users;
 import ru.netology.filecloud.repository.UserRepository;
 
 @Service
@@ -16,7 +16,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        User myUser = userRepository.findByLogin(userName);
+        Users myUser = userRepository.findByLogin(userName);
         if (myUser == null) {
             throw new UsernameNotFoundException("Unknown user: " + userName);
         }

@@ -8,11 +8,11 @@ import java.util.Optional;
 
 public interface UserFilesRepository extends JpaRepository<File, Integer> {
 
-    List<File> findByUser_Login(String log);
+    List<File> findByUsers_Login(String log);
 
-    Optional<File> findUserFilesByFileNameAndUser_Login(String fileName, String userLogin);
+    Optional<File> findUsersFilesByFileNameAndUsers_Login(String fileName, String usersLogin);
 
-    Optional<File> deleteUserFilesByFileNameAndUser_Login(String fileName, String userLogin);
+    Optional<File> deleteUsersFilesByFileNameAndUsers_Login(String fileName, String usersLogin);
 
-    boolean existsUserFilesByFileNameAndUser_Login(String fileName, String userLogin);
+    boolean existsUsersFilesByFileNameAndUsers_Login(String fileName, String usersLogin);
 }

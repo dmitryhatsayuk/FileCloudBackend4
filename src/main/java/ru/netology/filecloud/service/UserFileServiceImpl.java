@@ -34,7 +34,7 @@ public class UserFileServiceImpl implements UserFileService {
     @Override
     @Transactional
     public List<File> findUserFilesByUserLogin(String login) {
-        return userFilesRepository.findByUser_Login(login);
+        return userFilesRepository.findByUsers_Login(login);
     }
 
     @Override
@@ -46,7 +46,7 @@ public class UserFileServiceImpl implements UserFileService {
         }
         var dbUser = userService.findUser(login);
         Optional<File> userFile = Optional.of(new File());
-        userFile.get().setUser(dbUser);
+        userFile.get().setUsers(dbUser);
         userFile.get().setFileName(fileName);
         var fileContent = file.getBytes();
         userFile.get().setFileContent(fileContent);
@@ -61,7 +61,7 @@ public class UserFileServiceImpl implements UserFileService {
         if (!userFileService.existsUserFile(fileName, login)) {
             throw new EntityNotFoundException();
         }
-        userFilesRepository.deleteUserFilesByFileNameAndUser_Login(fileName, login)
+        userFilesRepository.deleteUsersFilesByFileNameAndUsers_Login(fileName, login)
                 .orElseThrow(IOException::new);
         return true;
     }
@@ -70,14 +70,14 @@ public class UserFileServiceImpl implements UserFileService {
     @Transactional
     public File findUserFileByFileNameAndUser_Login(String fileName, String userLogin) {
         return userFilesRepository
-                .findUserFilesByFileNameAndUser_Login(fileName, userLogin)
+                .findUsersFilesByFileNameAndUsers_Login(fileName, userLogin)
                 .orElseThrow(EntityNotFoundException::new);
     }
 
     @Override
     public boolean existsUserFile(String fileName, String userLogin) {
         return userFilesRepository
-                .existsUserFilesByFileNameAndUser_Login(fileName, userLogin);
+                .existsUsersFilesByFileNameAndUsers_Login(fileName, userLogin);
     }
 
     @Override

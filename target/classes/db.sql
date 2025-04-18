@@ -1,4 +1,4 @@
-create table "user"
+create table "users"
 (
     id        int primary key,
     login     varchar(255),
@@ -6,7 +6,7 @@ create table "user"
     authority varchar(255)
 );
 
-insert into "user" (id, login, password, authority)
+insert into "users" (id, login, password, authority)
 values (1, 'user', 'user', 'USER'),
        (2, 'user2', 'user2', 'USER');
 
@@ -15,7 +15,7 @@ create table "user_files"
     id           int primary key,
     file_name    varchar(255),
     file_content oid,
-    user_id      int references "user" (id)
+    user_id      int references "users" (id)
 );
 
 insert into "user_files"(id, file_name, file_content, user_id)
