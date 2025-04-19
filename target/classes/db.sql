@@ -15,12 +15,12 @@ create table "user_files"
     id           int primary key,
     file_name    varchar(255),
     file_content oid,
-    user_id      int references "users" (id)
+    user_id int references "users" (id)
 );
 
 insert into "user_files"(id, file_name, file_content, user_id)
-values (201, '1.png', lo_from_bytea(0, '71,77,65,72,74,79'), 1),
-       (202, '2.png', lo_from_bytea(0, '61,73,64,66,67'), 1),
-       (203, '3.png', lo_from_bytea(0, '64,66,67,68,6a'), 1);
+values (201, '1.jpg', lo_from_bytea(0, '71,77,65,72,74,79'), 1),
+       (202, '2.jpg', lo_from_bytea(0, '61,73,64,66,67'), 1),
+       (203, '3.jpg', lo_from_bytea(0, '64,66,67,68,6a'), 1);
 
 
