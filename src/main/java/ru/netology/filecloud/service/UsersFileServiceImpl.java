@@ -1,15 +1,15 @@
 package ru.netology.filecloud.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import ru.netology.filecloud.entity.File;
-import ru.netology.filecloud.repository.UserFilesRepository;
+import ru.netology.filecloud.repository.UsersFilesRepository;
 import ru.netology.filecloud.response.ListResponse;
 
-import javax.persistence.EntityNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,15 +17,15 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserFileServiceImpl implements UserFileService {
+public class UsersFileServiceImpl implements UsersFileService {
 
-    private final UserFilesRepository userFilesRepository;
-    private final UserService userService;
-    private final UserFileServiceImpl userFileService;
+    private final UsersFilesRepository userFilesRepository;
+    private final UsersService userService;
+    private final UsersFileServiceImpl userFileService;
 
-    public UserFileServiceImpl(UserFilesRepository userFilesRepository,
-                               UserService userService,
-                               @Lazy UserFileServiceImpl userFileService) {
+    public UsersFileServiceImpl(UsersFilesRepository userFilesRepository,
+                                UsersService userService,
+                                @Lazy UsersFileServiceImpl userFileService) {
         this.userFilesRepository = userFilesRepository;
         this.userService = userService;
         this.userFileService = userFileService;

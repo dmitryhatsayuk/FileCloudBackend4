@@ -9,6 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+//Сущность для запросов на переименование
 public class PutRequest {
     private String filename;
 }

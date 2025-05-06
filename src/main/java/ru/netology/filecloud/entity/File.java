@@ -2,9 +2,8 @@ package ru.netology.filecloud.entity;
 
 //import jakarta.persistence.*;
 
+import jakarta.persistence.*;
 import lombok.*;
-
-import javax.persistence.*;
 
 @Getter
 @Setter
@@ -14,7 +13,7 @@ import javax.persistence.*;
 @Entity
 
 public class File {
-
+    //Сущность для файла
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;

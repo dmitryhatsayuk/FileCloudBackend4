@@ -6,13 +6,13 @@ import ru.netology.filecloud.entity.Users;
 
 import java.util.Optional;
 
-
+//Интерфейс для пользовательских учеток
 @Repository
-public interface UserRepository extends JpaRepository<Users, Integer> {
+public interface UsersRepository extends JpaRepository<Users, Integer> {
 
-    Optional<Users> findUserByLogin(String login);
+    Optional<Users> findUsersByLogin(String login);
 
     Users findByLogin(String login);
 
-    boolean existsUserByLogin(String userLogin);
+    boolean existsUsersByLogin(String userLogin);
 }

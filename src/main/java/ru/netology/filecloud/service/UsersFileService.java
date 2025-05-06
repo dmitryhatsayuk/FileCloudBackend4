@@ -7,7 +7,7 @@ import ru.netology.filecloud.response.ListResponse;
 import java.io.IOException;
 import java.util.List;
 
-public interface UserFileService {
+public interface UsersFileService {
 
     List<File> findUserFilesByUserLogin(String login) throws IOException;
 

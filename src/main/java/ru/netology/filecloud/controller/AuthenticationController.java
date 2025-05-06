@@ -25,6 +25,7 @@ public class AuthenticationController {
 
     private final JWTUtil jwtTokenUtil;
 
+    //Конфигураия входв и выхода пользователя на эндпоинтах, присвоение токена
     @PostMapping(value = "/login")
     @ResponseStatus(value = HttpStatus.OK)
     public Object createAuthenticationToken(@RequestBody AuthRequest authRequest) {
@@ -34,6 +35,7 @@ public class AuthenticationController {
                         .getLogin(), authRequest.getPassword()));
 
         if (authentication == null) {
+            //если аутентификация не пройдена
             throw new BadCredentialsException("Bad credentials");
         }
         String jwt = jwtTokenUtil.generateToken((UserDetails) authentication.getPrincipal());

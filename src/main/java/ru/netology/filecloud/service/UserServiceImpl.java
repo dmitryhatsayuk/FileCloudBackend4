@@ -4,22 +4,22 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.netology.filecloud.entity.Users;
-import ru.netology.filecloud.repository.UserRepository;
+import ru.netology.filecloud.repository.UsersRepository;
 
 @AllArgsConstructor
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UsersService {
 
-    private UserRepository userRepository;
+    private UsersRepository userRepository;
 
     @Override
     @Transactional
     public Users findUser(String userLogin) {
-        return userRepository.findUserByLogin(userLogin).orElseThrow();
+        return userRepository.findUsersByLogin(userLogin).orElseThrow();
     }
 
     @Override
     public boolean existUser(String userLogin) {
-        return userRepository.existsUserByLogin(userLogin);
+        return userRepository.existsUsersByLogin(userLogin);
     }
 }

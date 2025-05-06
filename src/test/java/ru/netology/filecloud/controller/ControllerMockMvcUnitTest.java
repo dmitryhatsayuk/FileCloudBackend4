@@ -10,13 +10,13 @@ import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
 import ru.netology.filecloud.entity.File;
-import ru.netology.filecloud.entity.User;
+import ru.netology.filecloud.entity.Users;
 import ru.netology.filecloud.request.PutRequest;
 import ru.netology.filecloud.response.ListResponse;
 import ru.netology.filecloud.security.JWTUtil;
 import ru.netology.filecloud.service.CustomUserDetailsService;
-import ru.netology.filecloud.service.UserFileService;
-import ru.netology.filecloud.service.UserService;
+import ru.netology.filecloud.service.UsersFileService;
+import ru.netology.filecloud.service.UsersService;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -42,10 +42,10 @@ public class ControllerMockMvcUnitTest {
     private ObjectMapper objectMapper;
 
     @MockBean
-    private UserFileService clientFileService;
+    private UsersFileService usersFileService;
 
     @MockBean
-    private UserService clientService;
+    private UsersService usersService;
 
     @MockBean
     private JWTUtil jwtUtil;
@@ -61,16 +61,16 @@ public class ControllerMockMvcUnitTest {
     @DisplayName("Post /file сохраняет файл в базе и возвращает HTTP статус 200 ОК")
     void postNewFileThenGivenOkStatus() throws Exception {
         String fieldName = "filename";
-        String fileName = "Serg.png";
+        String fileName = "TestFile5.jpg";
         byte[] content = new byte[]{(byte) 12345};
 
         MockMultipartFile file = new MockMultipartFile(
                 fileName,
-                fileName + "test",
+                fileName + "TestFile3.jpg",
                 "multipart/form-data/plain",
                 content);
 
-        when(clientFileService.createNewFile(fileName, file))
+        when(usersFileService.createNewFile(fileName, file))
                 .thenReturn(true);
 
 
@@ -88,16 +88,16 @@ public class ControllerMockMvcUnitTest {
         byte[] content1 = new byte[]{(byte) 54321};
         byte[] content2 = new byte[]{(byte) 12345};
         List<ListResponse> listResponse = new ArrayList<>();
-        listResponse.add(new ListResponse("Serg.png", content1.length));
-        listResponse.add(new ListResponse("Olga.png", content2.length));
-        when(clientFileService.getList()).thenReturn(listResponse);
+        listResponse.add(new ListResponse("TestFile1.jpg", content1.length));
+        listResponse.add(new ListResponse("estFile2.jpg", content2.length));
+        when(usersFileService.getList()).thenReturn(listResponse);
         mockMvc.perform(get("/list")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().json(objectMapper.writeValueAsString(listResponse)))
                 .andExpect(jsonPath("$", hasSize(2)))
-                .andExpect(jsonPath("$[*].filename", containsInAnyOrder("Serg.png", "Olga.png")));
+                .andExpect(jsonPath("$[*].filename", containsInAnyOrder("TestFile1.jpg", "TestFile2.jpg")));
     }
 
     @Test
@@ -105,20 +105,20 @@ public class ControllerMockMvcUnitTest {
     void deleteByName() throws Exception {
 
 
-        User client = new User(1, "log", "pass", "USER1");
+        Users client = new Users(1, "user", "user", "USER");
         byte[] content = new byte[]{(byte) 12345};
         File clientFile = new File(
                 1,
-                "Serg.png",
+                "TestFile2.jpg",
                 content,
                 client);
 
-        when(clientFileService
-                .deleteUserFilesByFileNameAndUser_Login("Serg.png"))
+        when(usersFileService
+                .deleteUserFilesByFileNameAndUser_Login("TestFile2.jpg"))
                 .thenReturn(true);
 
         mockMvc.perform(delete("/file")
-                        .param("filename", "Serg.png")
+                        .param("filename", "TestFile2.jpg")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk());
@@ -128,11 +128,11 @@ public class ControllerMockMvcUnitTest {
     @DisplayName("GET /file возвращает имя файла и содержимое по имени")
     void getFileNameAndContentByFileName() throws Exception {
         byte[] content = new byte[]{(byte) 12345};
-        when(clientFileService
+        when(usersFileService
                 .readFile(anyString()))
                 .thenReturn(Arrays.toString(content));
         mockMvc.perform(get("/file")
-                        .param("filename", "Serg.png")
+                        .param("filename", "TestFile1.jpg")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -143,16 +143,16 @@ public class ControllerMockMvcUnitTest {
     @Test
     @DisplayName("PUT /file меняет имя файла и возвращает HTTP статус 200 ОК")
     void putByName() throws Exception {
-        String fileName = "Serg.png";
-        User client = new User(1, "log", "pass", "USER1");
+        String fileName = "TestFile1.jpg";
+        Users client = new Users(1, "user", "user", "USER");
         byte[] content = new byte[]{(byte) 12345};
-        PutRequest body = new PutRequest("475.png");
+        PutRequest body = new PutRequest("NewTestFileName1.jpg");
         File clientFile = new File(
                 1,
-                "Serg.png",
+                "TestFile1.jpg",
                 content,
                 client);
-        when(clientFileService.changeFileName(fileName, body.getFilename()))
+        when(usersFileService.changeFileName(fileName, body.getFilename()))
                 .thenReturn(clientFile);
         mockMvc.perform(put("/file")
                         .param("filename", fileName)

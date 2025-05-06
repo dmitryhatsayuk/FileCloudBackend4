@@ -1,0 +1,25 @@
+services:
+  filecloud:
+    build: .
+    restart: on-failure
+    ports:
+      - 8080:8080
+    networks:
+      - filecloud-net
+    environment:
+      - spring.datasource.url=jdbc:postgresql://postgres:5432/postgres
+    depends_on:
+      - postgres
+
+  postgres:
+    image: "postgres:latest"
+    ports:
+      - 5432:5432
+    networks:
+      - filecloud-net
+    environment:
+      POSTGRES_DATABASE: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+networks:
+  filecloud-net:

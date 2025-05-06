@@ -6,7 +6,9 @@ import ru.netology.filecloud.entity.File;
 import java.util.List;
 import java.util.Optional;
 
-public interface UserFilesRepository extends JpaRepository<File, Integer> {
+//Интерфейс для пользовательских файлов
+
+public interface UsersFilesRepository extends JpaRepository<File, Integer> {
 
     List<File> findByUsers_Login(String log);
 

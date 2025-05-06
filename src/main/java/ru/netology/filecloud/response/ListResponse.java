@@ -11,6 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
+//Сущность для возврата списка
 public class ListResponse {
 
     @JsonProperty("filename")

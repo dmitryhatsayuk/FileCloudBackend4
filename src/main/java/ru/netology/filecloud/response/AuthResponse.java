@@ -13,7 +13,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AuthResponse {
-
+    //Сущность ответов на запросы аутентификации
     @JsonProperty("auth-token")
     private String jwtToken;
 }

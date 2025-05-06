@@ -10,6 +10,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
+//Сущность для возврата ошибок
+
 public class ErrorResponse {
 
     @JsonProperty("message")
